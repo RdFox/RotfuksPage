@@ -57,22 +57,9 @@
             link: '/portfolio',
           },
           {
-            type: 'dropdown',
-            title: 'Blogs',
-            subs: [
-              {
-                title: 'Tec Blog',
-                link: '/tecblog',
-              },
-              {
-                title: 'Event Blog',
-                link: '/eventblog',
-              },
-              {
-                title: 'Blog Form',
-                link: '/blogform',
-              },
-            ],
+            type: 'normal',
+            title: 'Blog',
+            link: '/blog',
           },
         ],
         navbaritemsright: [

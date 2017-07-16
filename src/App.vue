@@ -7,7 +7,6 @@
 </template>
 
 <script>
-  import Firebase from 'firebase';
   import RfNavbar from './components/RF-Navbar';
   import RfFooter from './components/RF-Footer';
 

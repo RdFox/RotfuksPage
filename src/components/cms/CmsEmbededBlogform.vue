@@ -1,44 +1,95 @@
 <template>
-  <b-form class="blogform">
+  <form class="blogform col-12" v-on:submit.prevent="addBlog">
     <div class="title-panel">
-      <b-form-file class="file" id="file" v-model="file" choose-label="Blog-Image"></b-form-file>
-      <b-form-input class="title" id="title" v-model="title" type="text" placeholder="Enter the Blog Title"></b-form-input>
+      <b-form-input class="avatar" id="avatar" v-model="newBlog.avatar" type="text" placeholder="Enter an Imagelink"></b-form-input>
+      <b-form-input class="title" id="title" v-model="newBlog.title" type="text" placeholder="Enter the Blog Title"></b-form-input>
     </div>
-    <b-form-input textarea id="text" v-model="text" placeholder="Top Text Content"></b-form-input>
-    <b-button id="submit" variant="secondary" href="">Commit Entry</b-button>
-  </b-form>
+    <b-form-input textarea id="text" v-model="newBlog.text" placeholder="Enter the Text Content"></b-form-input>
+    <div class="title-panel">
+      <b-form-select class="dropdown" v-model="newBlog.category" :options="options" />
+      <input type="submit" class="btn btn-secondary submit" value="Add Blog!"/>
+    </div>
+  </form>
 </template>
 
 <script>
+  import toastr from 'toastr';
+  import firebase from '../../utils/firebase';
+  import timeStamp from '../../utils/timestamp';
+
+  const blogRef = firebase.database().ref('blogs');
+
   export default {
     name: 'CmsEmbededBlogform',
     props: ['data'],
+    firebase: {
+      blogs: blogRef,
+    },
+    data() {
+      return {
+        options: [
+          {
+            text: 'Tec-Blog',
+            value: 'tec',
+          },
+          {
+            text: 'Event-Blog',
+            value: 'event',
+          },
+          {
+            text: 'Personal-Blog',
+            value: 'personal',
+          },
+        ],
+        newBlog: {
+          avatar: '',
+          title: '',
+          text: '',
+          category: 'tec',
+          date: timeStamp(),
+          sortkey: (-1 * Date.now()),
+        },
+      };
+    },
+    methods: {
+      addBlog: function addBlog() {
+        if (this.newBlog.title && this.newBlog.text) {
+          blogRef.push(this.newBlog);
+          this.newBlog.avatar = '';
+          this.newBlog.title = '';
+          this.newBlog.text = '';
+          toastr.success('Blog added!');
+        } else {
+          toastr.warning('Please fill out at least Title and Text!');
+        }
+      },
+    },
   };
+
 </script>
 <style scoped>
   .blogform {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 16px;
-    width: 500px;
   }
-
-  .title-panel {
-    display: flex;
-  }
-  .file {
-    width: 40%;
-  }
-  .title {
-    width: 60%;
-  }
-
   #text {
     margin-top: 10px;
     height: 200px;
   }
-
-  #submit {
-    margin: 10px;
+  @media screen and (min-width: 480px) {
+    .title-panel {
+      display: flex;
+    }
+    .avatar,
+    .title {
+      width: 50%;
+    }
+    .dropdown {
+      width: 70%;
+    }
+    .submit {
+      width: 30%;
+    }
   }
 </style>
