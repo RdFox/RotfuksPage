@@ -5,10 +5,10 @@
         <label for="toggle" class="toggle-label">Toggle Blog-Form</label>
         <a id="toggle" class="btn btn-secondary plus-button" v-on:click="toggleForm"><span id="button-icon" class="fa fa-chevron-right"></span></a>
       </div>
-      <b-form-fieldset :label="label" :description="desc">
-        <b-form-checkbox checked v-model="tec" value="tec">Show Tec</b-form-checkbox>
-        <b-form-checkbox checked v-model="event" value="event">Show Event</b-form-checkbox>
-        <b-form-checkbox checked v-model="private" value="private">Show Private</b-form-checkbox>
+      <b-form-fieldset id="flavours" :label="label" :description="desc">
+        <b-form-checkbox v-model="tecblog" v-on:click="changeFlavour">Show Tec</b-form-checkbox>
+        <b-form-checkbox v-model="eventblog" v-on:click="changeFlavour">Show Event</b-form-checkbox>
+        <b-form-checkbox v-model="privateblog" v-on:click="changeFlavour">Show Private</b-form-checkbox>
       </b-form-fieldset>
     </div>
     <div class="content">
@@ -57,6 +57,9 @@
         label: 'Choose Your Flavours:',
         desc: 'Which Category do you want to read? (Not yet functional, Sorry!)',
         selected: [],
+        tecblog: true,
+        eventblog: true,
+        privateblog: true,
       };
     },
     methods: {
@@ -74,6 +77,9 @@
           blogform.style.display = 'none';
           buttonicon.setAttribute('class', 'fa fa-chevron-right');
         }
+      },
+      changeFlavour: function changeFlavour() {
+        toastr.error('Sorry, that is not working yet!');
       },
     },
   };

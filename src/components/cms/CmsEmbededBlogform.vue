@@ -22,9 +22,6 @@
   export default {
     name: 'CmsEmbededBlogform',
     props: ['data'],
-    firebase: {
-      blogs: blogRef,
-    },
     data() {
       return {
         options: [
@@ -46,14 +43,14 @@
           title: '',
           text: '',
           category: 'tec',
-          date: timeStamp(),
-          sortkey: (-1 * Date.now()),
         },
       };
     },
     methods: {
       addBlog: function addBlog() {
         if (this.newBlog.title && this.newBlog.text) {
+          this.newBlog.date = timeStamp();
+          this.newBlog.sortkey = (-1 * Date.now());
           blogRef.push(this.newBlog);
           this.newBlog.avatar = '';
           this.newBlog.title = '';

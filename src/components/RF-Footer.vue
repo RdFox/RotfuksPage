@@ -17,8 +17,8 @@
     data() {
       return {
         contact: {
-          text: 'Kontakt',
-          href: '#/contact',
+          text: 'Contact',
+          href: '#/aboutme',
         },
         impressum: {
           text: 'Impressum',

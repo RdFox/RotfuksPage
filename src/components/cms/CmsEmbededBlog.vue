@@ -1,7 +1,12 @@
 <template>
   <b-card>
     <b-media>
-      <img slot="aside" :src="data.avatar">
+      <div slot="aside">
+        <img :src="data.avatar">
+        <br/><br/>
+        <p>Postet on:<br/>
+        {{ data.date }}</p>
+      </div>
       <h5 class="mt-0">{{ data.title }}</h5>
       <p class="text">{{ data.text }}</p>
     </b-media>
@@ -24,6 +29,5 @@
  }
  .text {
    white-space: pre-wrap;
-   word-wrap: break-word;
  }
 </style>

@@ -63,6 +63,11 @@
           },
         ],
         navbaritemsright: [
+          {
+            type: 'normal',
+            title: 'Login',
+            link: '/login',
+          },
         ],
       };
     },
