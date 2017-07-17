@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import RfNavbar from './components/RF-Navbar';
-  import RfFooter from './components/RF-Footer';
+  import RfNavbar from './components/Rf-Navbar';
+  import RfFooter from './components/Rf-Footer';
 
   export default {
     components: {

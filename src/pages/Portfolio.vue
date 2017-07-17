@@ -1,7 +1,8 @@
 <template>
   <div id="portfolio">
     <div class="sidebar">
-      <div class="toggle-bar row justify-content-center">
+      <div :v-if="user !== false" class="toggle-bar row justify-content-center">
+        {{ user }}
         <label for="toggle">Toggle Entry-Form</label>
         <a id="toggle" class="btn btn-secondary plus-button" v-on:click="toggleForm"><span id="button-icon" class="fa fa-chevron-right"></span></a>
       </div>
@@ -63,6 +64,7 @@
     name: 'portfolio',
     data() {
       return {
+        user: firebase.auth().currentUser,
         sitetitle: 'Portfolio',
       };
     },
