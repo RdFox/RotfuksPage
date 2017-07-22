@@ -1,7 +1,19 @@
 <template>
-  <div id="blog">
-    <div class="sidebar">
-      <div class="toggle-bar row justify-content-center">
+  <div id="blog" class="row">
+    <div class="titles col-12">
+      <b-jumbotron :header="sitetitle" :lead="welcometext.title" >
+        <p class="welcometext">{{ welcometext.text }}</p>
+        <b-btn variant="outline-danger" :href="welcometext.href">{{welcometext.link}}</b-btn>
+      </b-jumbotron>
+      <hr/>
+    </div>
+    <div class="sidebar col-3 col-md-2">
+      <div class="about">
+        <h4>About</h4>
+        <p><i class="fa fa-wrench" aria-hidden="true"></i> My Blog is - as is the whole Homepage - still under construction. Sorry if anything (like e.g. the flavour selection) is not yet working.</p>
+        <p>I am trying to get it to work as fast as possible but this is not my only project. Thanks! :)</p>
+      </div>
+      <div v-if="global.loggedIn" class="toggle-bar row justify-content-center">
         <label for="toggle" class="toggle-label">Toggle Blog-Form</label>
         <a id="toggle" class="btn btn-secondary plus-button" v-on:click="toggleForm"><span id="button-icon" class="fa fa-chevron-right"></span></a>
       </div>
@@ -11,15 +23,9 @@
         <b-form-checkbox v-model="privateblog" v-on:click="changeFlavour">Show Private</b-form-checkbox>
       </b-form-fieldset>
     </div>
-    <div class="content">
+    <div class="content col-12 col-sm-9 col-md-10">
       <div class="row justify-content-center">
-        <div class="auto">
-          <h1>{{ sitetitle }}</h1>
-          <hr/>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-12 block" id="blogform">
+        <div v-if="global.loggedIn" class="col-12 block" id="blogform">
           <cms-embeded-blogform></cms-embeded-blogform>
         </div>
         <div v-for="blog in blogs" :key="blog.key" :id="blog.key" class="col-12 block">
@@ -39,6 +45,7 @@
   import CmsEmbededBlog from '../components/cms/CmsEmbededBlog';
   import CmsEmbededBlogform from '../components/cms/CmsEmbededBlogform';
   import firebase from '../utils/firebase';
+  import global from '../utils/globalstate';
 
   const blogRef = firebase.database().ref('blogs');
 
@@ -48,11 +55,16 @@
       CmsEmbededBlogform,
     },
     firebase: {
+      welcometext: {
+        source: firebase.database().ref('blog/welcometext'),
+        asObject: true,
+      },
       blogs: blogRef.orderByChild('sortkey'),
     },
     name: 'blog',
     data() {
       return {
+        global,
         sitetitle: 'Rotfuks\' Blog',
         label: 'Choose Your Flavours:',
         desc: 'Which Category do you want to read? (Not yet functional, Sorry!)',
@@ -70,7 +82,7 @@
       toggleForm: function toggleForm() {
         const blogform = document.getElementById('blogform');
         const buttonicon = document.getElementById('button-icon');
-        if (blogform.style.display === 'none') {
+        if (blogform.style.display === 'none' || blogform.style.display === '') {
           blogform.style.display = 'block';
           buttonicon.setAttribute('class', 'fa fa-chevron-left');
         } else {
@@ -84,7 +96,18 @@
     },
   };
 </script>
-<style>
+<style scoped>
+  .jumbotron {
+    background-color: #fff;
+    margin: -25px 0;
+  }
+  .welcometext {
+    white-space: pre-wrap;
+  }
+  .about {
+    background-color: #f5f5f5;
+    padding: 10px;
+  }
   .block {
     padding: 10px;
     max-width: 1040px;
@@ -104,40 +127,29 @@
   .delete:hover {
     color: gray;
   }
-  @media screen and (min-width: 740px) {
-    #blog {
-      display: flex;
-      margin: 30px;
-    }
-    .sidebar {
-      width: 15%;
-      margin-right: 15px;
-      padding-right: 15px;
-      border-right: 1px solid #ccc;
-    }
-    .content {
-      width: 85%;
-    }
-  }
-  @media screen and (max-width: 740px) {
-    #blog {
-      display: block;
-      margin: 30px;
-    }
-    .sidebar {
-      width: 100%;
-      margin: 15px;
-      padding: 15px;
-    }
-    .content {
-      width: 100%;
-    }
-  }
   .plus-button {
     width: 100%;
   }
   #blogform {
     display: none;
     width: 90%;
+  }
+  #blog {
+    display: flex;
+    margin: 30px;
+  }
+  @media screen and (min-width: 740px) {
+    .sidebar {
+      display: block;
+      border-right: 1px solid #ccc;
+    }
+    .content {
+      padding-left: 25px;
+    }
+  }
+  @media screen and (max-width: 740px) {
+    .sidebar {
+      display: none;
+    }
   }
 </style>

@@ -39,20 +39,6 @@
               src: 'static/img/assets/profile.jpeg',
             },
           },
-          {
-            id: 'contacttext',
-            classes: 'col-12 col-sm-9 block',
-            type: 'text',
-            content: {
-              title: 'Hey There!',
-              contentTop: 'Wir stehen natürlich zu allen Fragen und jeglichem Feedback zur Verfügung! Als sehr junger Verein werfen wir natürlich mit unserem Konzept sicher einige Fragen auf und sind generell auf viel Feedback angewiesen!',
-              contentBottom: 'Also trau dich! Schreib uns einfach eine Mail an kontakt@esportsgermany.de und wir werden uns gleich um dein Anliegen kümmern. Fragen, Feedback, Anregungen oder einfach nur eine Mail zum Hallo sagen und kennen lernen, wir freuen uns auf deine Nachricht!',
-              link: {
-                text: 'Natürlich kannst du uns auch einfach über unsere Facebook Seite erreichen!',
-                href: 'https://www.facebook.com/esportsgermany.de',
-              },
-            },
-          },
         ],
       };
     },

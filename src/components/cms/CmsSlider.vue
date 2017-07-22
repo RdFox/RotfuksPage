@@ -1,7 +1,7 @@
 <template>
     <b-carousel controls indicators :interval="data.interval" :background="data.background" :height="data.height">
       <!-- Text slides -->
-      <rf-carousel-slide
+      <r-f-carousel-slide
         v-for="slide in data.slides"
         :key="slide.caption"
         :url="slide.link"
@@ -10,8 +10,11 @@
         :text="slide.text"
         :img="slide.img"
         :v-link="slide.link"
-        :height="slide.height ? slide.height : data.height">
-      </rf-carousel-slide>
+        :height="slide.height ? slide.height : data.height"
+        :button="slide.button"
+        :href="slide.href"
+        :textalign="slide.textalign">
+      </r-f-carousel-slide>
     </b-carousel>
 </template>
 
@@ -26,9 +29,8 @@
     },
   };
 </script>
-<style>
-  .cms-slider{
-    margin-bottom: 20px;
+<style scoped>
+  .carousel-inner {
+    height: 100%;
   }
-
 </style>

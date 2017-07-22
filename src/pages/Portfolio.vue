@@ -1,8 +1,14 @@
 <template>
-  <div id="portfolio">
-    <div class="sidebar">
-      <div :v-if="user !== false" class="toggle-bar row justify-content-center">
-        {{ user }}
+  <div class="row" id="portfolio">
+    <div class="titles col-12">
+      <b-jumbotron :header="sitetitle" :lead="welcometext.title" >
+        <p class="welcometext">{{ welcometext.text }}</p>
+        <b-btn variant="outline-danger" :href="welcometext.href">{{welcometext.link}}</b-btn>
+      </b-jumbotron>
+      <hr/>
+    </div>
+    <div class="sidebar col-3 col-md-2">
+      <div v-if="global.loggedIn" class="toggle-bar row justify-content-center">
         <label for="toggle">Toggle Entry-Form</label>
         <a id="toggle" class="btn btn-secondary plus-button" v-on:click="toggleForm"><span id="button-icon" class="fa fa-chevron-right"></span></a>
       </div>
@@ -15,19 +21,8 @@
         </ul>
       </div>
     </div>
-    <div class="content">
-      <div class="row justify-content-center">
-        <div class="auto">
-          <h1>{{ sitetitle }}</h1><hr/>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="auto block">
-          <h4 class="mt-0">{{ welcometext.title }}</h4>
-          <p class="welcometext">{{ welcometext.text }}</p>
-        </div>
-      </div>
-      <div id="portfolio-form" class="portfolio-form row">
+    <div class="content col-12 col-sm-9 col-md-10 ">
+      <div v-if="global.loggedIn" id="portfolio-form" class="portfolio-form row">
         <cms-portfolio-form></cms-portfolio-form>
       </div>
       <div class="portfolio-entries row">
@@ -43,6 +38,7 @@
 <script>
   import toastr from 'toastr';
   import firebase from '../utils/firebase';
+  import global from '../utils/globalstate';
 
   import CmsPortfolioEntry from '../components/cms/CmsEmbeddedPortfolioEntry';
   import CmsPortfolioForm from '../components/cms/CmsEmbeddedPortfolioForm';
@@ -64,7 +60,7 @@
     name: 'portfolio',
     data() {
       return {
-        user: firebase.auth().currentUser,
+        global,
         sitetitle: 'Portfolio',
       };
     },
@@ -76,7 +72,7 @@
       toggleForm: function toggleForm() {
         const entryform = document.getElementById('portfolio-form');
         const buttonicon = document.getElementById('button-icon');
-        if (entryform.style.display === 'none') {
+        if (entryform.style.display === 'none' || entryform.style.display === '') {
           entryform.style.display = 'block';
           buttonicon.setAttribute('class', 'fa fa-chevron-left');
         } else {
@@ -87,9 +83,10 @@
     },
   };
 </script>
-<style>
-  .block {
-    padding: 10px;
+<style scoped>
+  .jumbotron {
+    background-color: #fff;
+    margin: -25px 0;
   }
   .welcometext {
     white-space: pre-wrap;
@@ -121,37 +118,30 @@
   .toggle-bar {
     margin: 30px 0;
   }
-  .entry-overview {
+  .entrylist {
     width: 100%;
-    margin: 5px 15px;
+    text-overflow: ellipsis;
+  }
+  .entry-overview {
+    width: 150%;
+    margin: 5px -10px;
+  }
+  #portfolio {
+    display: flex;
+    margin: 30px;
   }
   @media screen and (min-width: 740px) {
-    #portfolio {
-      display: flex;
-      margin: 30px;
-    }
     .sidebar {
       display: block;
-      width: 15%;
-      margin-right: 15px;
-      padding-right: 15px;
       border-right: 1px solid #ccc;
     }
     .content {
-      width: 85%;
-      margin-left: 30px;
+      padding-left: 25px;
     }
   }
   @media screen and (max-width: 740px) {
-    #portfolio {
-      display: block;
-      margin: 30px;
-    }
     .sidebar {
       display: none;
-    }
-    .content {
-      width: 100%;
     }
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="rf-navbar">
-    <b-navbar toggleable type="light" variant="faded" :fixed="fixed">
+    <b-navbar toggleable type="inverse" variant="inverse" :fixed="fixed">
 
       <b-nav-toggle target="nav_collapse"></b-nav-toggle>
 
@@ -21,7 +21,7 @@
           </template>
         </b-nav>
         <b-nav is-nav-bar class="ml-auto">
-          <template v-if="user"><b-nav-item id="logout" to="#" v-on:click="logout">Logout</b-nav-item></template>
+          <template v-if="global.loggedIn"><b-nav-item id="logout" to="#" v-on:click="logout">Logout</b-nav-item></template>
           <template v-else><b-nav-item id="login" to="#" v-b-modal="'rf-login-modal'">Login</b-nav-item></template>
         </b-nav>
       </b-collapse>
@@ -34,16 +34,17 @@
 <script>
 import toastr from 'toastr';
 import firebase from '../utils/firebase';
+import global from '../utils/globalstate';
 import RFLoginModal from './Rf-LoginModal';
 
-const rfNavbar = {
+export default {
   name: 'rf-navbar',
   components: {
     RFLoginModal,
   },
   data() {
     return {
-      user: false,
+      global,
       fixed: 'top',
       brandsrc: '/static/img/logo/rotfuks_logo.png',
       brandtitle: 'Rotfuks',
@@ -67,32 +68,27 @@ const rfNavbar = {
     };
   },
   methods: {
-    onAuthChange: function onAuthChange(user) {
-      return user;
-    },
     logout: function logout() {
       firebase.auth().signOut().then(this.logoutSuccess).catch(this.logoutFail);
     },
     logoutSuccess: function logoutSuccess() {
-      toastr.success('You logged out successfully!');
+      function innerAuthChange(user) {
+        if (user) {
+          global.login(user);
+          toastr.success(`Your Login was successful.
+          Welcome back!`);
+        } else {
+          global.logout();
+          toastr.success('You logged out successfully!');
+        }
+      }
+      firebase.auth().onAuthStateChanged(innerAuthChange);
     },
     logoutFail: function logoutFail(error) {
       toastr.error(`Sorry! Something went wrong! Errorcode: ${error.code}`);
     },
   },
 };
-firebase.auth().onAuthStateChanged((firebaseUser) => {
-  if (firebaseUser) {
-    toastr.success(`Navbar State Changed!
-    ${firebaseUser.email}
-    ${rfNavbar.user}`);
-    rfNavbar.user = true;
-  } else {
-    this.data.user = false;
-  }
-});
-
-export default rfNavbar;
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -103,5 +99,8 @@ export default rfNavbar;
   .navbar-img {
     height: 35px;
     width: 40px;
+  }
+  .navlink {
+    color: red;
   }
 </style>

@@ -21,6 +21,7 @@
 <script>
   import toastr from 'toastr';
   import firebase from '../utils/firebase';
+  import global from '../utils/globalstate';
 
   export default {
     name: 'rf-login-modal',
@@ -80,8 +81,17 @@
           Errorcode: ${error.code}`);
           return e.cancel();
         }
-        toastr.success(`Your Login was successful.
-        Welcome back!`);
+        function innerAuthChange(user) {
+          if (user) {
+            global.login(user);
+            toastr.success(`Your Login was successful.
+          Welcome back!`);
+          } else {
+            global.logout();
+            toastr.success('You logged out successfully!');
+          }
+        }
+        firebase.auth().onAuthStateChanged(innerAuthChange);
         return true;
       },
     },

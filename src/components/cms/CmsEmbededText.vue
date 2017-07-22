@@ -18,7 +18,7 @@
     props: ['data'],
   };
 </script>
-<style>
+<style scoped>
   h2 {
     padding: 10px;
   }

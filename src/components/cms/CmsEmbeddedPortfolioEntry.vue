@@ -5,7 +5,7 @@
       <p class="lead">{{ data.lead }}</p>
       <img class="img-fluid rf-img" :src="data.avatar"  :alt="data.header"/>
       <p class="text">{{ data.text }}</p>
-      <b-btn class="button" variant="secondary" :href="data.linkhref">{{ data.linktext }}</b-btn>
+      <b-btn class="button" variant="outline-danger" :href="data.linkhref">{{ data.linktext }}</b-btn>
     </div>
   </div>
 </template>
