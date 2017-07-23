@@ -18,7 +18,7 @@
       return {
         contact: {
           text: 'Contact',
-          href: '#/aboutme',
+          href: 'mailto:dk.dkress@gmail.com',
         },
         impressum: {
           text: 'Impressum',

@@ -7,14 +7,6 @@
             <b-form-input type="password" placeholder="Enter your Password" v-model="login.password"></b-form-input>
           </form>
         </b-tab>
-        <b-tab title="Register">
-          <form @submit.stop.prevent="submit">
-            <b-form-input type="text" placeholder="Enter your email" v-model="register.email"></b-form-input>
-            <b-form-input type="password" placeholder="Enter your Password" v-model="register.password"></b-form-input>
-            <b-form-input type="password" placeholder="Repeat your Password" v-model="register.passwordRepeat"></b-form-input>
-            <b-form-checkbox v-model="register.agb" required>I accept all the stuff the Owner wants to do with my email address! :)</b-form-checkbox>
-          </form>
-        </b-tab>
       </b-tabs>
     </b-modal>
 </template>

@@ -1,12 +1,6 @@
 <template>
   <div class="row" id="portfolio">
-    <div class="titles col-12">
-      <b-jumbotron :header="sitetitle" :lead="welcometext.title" >
-        <p class="welcometext">{{ welcometext.text }}</p>
-        <b-btn variant="outline-danger" :href="welcometext.href">{{welcometext.link}}</b-btn>
-      </b-jumbotron>
-      <hr/>
-    </div>
+    <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
     <div class="sidebar col-3 col-md-2">
       <div v-if="global.loggedIn" class="toggle-bar row justify-content-center">
         <label for="toggle">Toggle Entry-Form</label>
@@ -42,6 +36,7 @@
 
   import CmsPortfolioEntry from '../components/cms/CmsEmbeddedPortfolioEntry';
   import CmsPortfolioForm from '../components/cms/CmsEmbeddedPortfolioForm';
+  import CmsEmbededJumbotron from '../components/cms/CmsEmbededJumbotron';
 
   const entriesRef = firebase.database().ref('portfolio/entries');
 
@@ -49,6 +44,7 @@
     components: {
       CmsPortfolioEntry,
       CmsPortfolioForm,
+      CmsEmbededJumbotron,
     },
     firebase: {
       welcometext: {
@@ -84,13 +80,6 @@
   };
 </script>
 <style scoped>
-  .jumbotron {
-    background-color: #fff;
-    margin: -25px 0;
-  }
-  .welcometext {
-    white-space: pre-wrap;
-  }
   .portfolio-form {
     padding: 20px;
     display: none;

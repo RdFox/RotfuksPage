@@ -1,11 +1,11 @@
 <template>
-  <div class="carousel-item" :style="{background,height}" @click="slideClick">
+  <div class="carousel-item" :style="{background,height}">
     <img class="d-block img-fluid" v-if="img" :src="img" :alt="imgAlt">
     <div :class="textalign + ' carousel-caption d-md-block'">
       <p class="caption" v-if="caption" v-html="caption"></p>
       <p v-if="text" v-html="text"></p>
       <p v-if="button">
-        <b-btn class="button" variant="danger" :href="href">{{ button }}</b-btn>
+        <b-btn class="button" variant="danger" :href="href" @click="slideClick">{{ button }}</b-btn>
       </p>
       <slot></slot>
     </div>

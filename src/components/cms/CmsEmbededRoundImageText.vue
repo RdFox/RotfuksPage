@@ -32,7 +32,7 @@
 </script>
 <style scoped>
   .cms-embeded-roundimage-text {
-    padding: 20px;
+    padding: 30px;
   }
   .rounded-circle {
     margin: 10px;

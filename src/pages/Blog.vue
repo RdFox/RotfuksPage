@@ -1,12 +1,6 @@
 <template>
   <div id="blog" class="row">
-    <div class="titles col-12">
-      <b-jumbotron :header="sitetitle" :lead="welcometext.title" >
-        <p class="welcometext">{{ welcometext.text }}</p>
-        <b-btn variant="outline-danger" :href="welcometext.href">{{welcometext.link}}</b-btn>
-      </b-jumbotron>
-      <hr/>
-    </div>
+    <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
     <div class="sidebar col-3 col-md-2">
       <div class="about">
         <h4>About</h4>
@@ -44,15 +38,17 @@
 
   import CmsEmbededBlog from '../components/cms/CmsEmbededBlog';
   import CmsEmbededBlogform from '../components/cms/CmsEmbededBlogform';
+  import CmsEmbededJumbotron from '../components/cms/CmsEmbededJumbotron';
   import firebase from '../utils/firebase';
   import global from '../utils/globalstate';
 
-  const blogRef = firebase.database().ref('blogs');
+  const blogRef = firebase.database().ref('blog/blogs');
 
   export default {
     components: {
       CmsEmbededBlog,
       CmsEmbededBlogform,
+      CmsEmbededJumbotron,
     },
     firebase: {
       welcometext: {
@@ -65,7 +61,6 @@
     data() {
       return {
         global,
-        sitetitle: 'Rotfuks\' Blog',
         label: 'Choose Your Flavours:',
         desc: 'Which Category do you want to read? (Not yet functional, Sorry!)',
         selected: [],
@@ -97,13 +92,6 @@
   };
 </script>
 <style scoped>
-  .jumbotron {
-    background-color: #fff;
-    margin: -25px 0;
-  }
-  .welcometext {
-    white-space: pre-wrap;
-  }
   .about {
     background-color: #f5f5f5;
     padding: 10px;

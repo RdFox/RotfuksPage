@@ -1,12 +1,13 @@
 <template>
-  <div class="hello">
+  <div id="hello">
     <cms-slider class="slider" :data="slider"></cms-slider>
     <div class="container">
-    <div class="row">
-      <cms-embeded-round-image-text v-for="roundimagetext in roundimagetexts" :v-key="roundimagetext.title" :data="roundimagetext"></cms-embeded-round-image-text>
+      <div class="row roundimages">
+        <template v-for="roundimagetext in roundimagetexts" >
+          <cms-embeded-round-image-text :v-key="roundimagetext.key" :data="roundimagetext"></cms-embeded-round-image-text>
+        </template>
+      </div>
     </div>
-    </div>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
   </div>
 </template>
 
@@ -28,7 +29,7 @@
           height: '450px',
           background: '#777',
           width: '100%',
-          interval: '6000',
+          interval: 6000,
           slides: [
             {
               caption: 'About Me',
@@ -55,15 +56,17 @@
         roundimagetexts: [
           {
             classes: 'col-md-4',
-            img: 'http://rotfuks.de/static/img/logo/rotfuks_logo.png',
-            alt: 'The Rotfuks Logo',
-            title: 'You want to see more?',
-            text: 'If you are interested in an overview of my projects you can also check out my Portfolio on this Page. There I have made an small overview of some of my projects I created along the way.',
-            button: 'My Portfolio',
-            href: '#/portfolio',
+            key: 0,
+            img: 'https://cdn.worldvectorlogo.com/logos/xing-icon.svg',
+            alt: 'The Xing Logo',
+            title: 'Do you want to get in touch?',
+            text: 'If you want to get in touch with me about business stuff you can check out my Xing-Account. It is like LinkedIn. Should I get LinkedIn? I don\'t know. Is it better? \nWrite me! :)',
+            button: 'My Xing',
+            href: 'https://www.xing.com/profile/Dominik_Kress5?sc_o=mxb_p',
           },
           {
             classes: 'col-md-4',
+            key: 1,
             img: 'https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png',
             alt: 'The Github Logo',
             title: 'Check out my Github Account',
@@ -73,6 +76,7 @@
           },
           {
             classes: 'col-md-4',
+            key: 2,
             img: 'https://avatars0.githubusercontent.com/u/9892522?v=4&s=400',
             alt: 'The FreeCodeCamp Logo',
             title: 'Check out my FreeCodeCamp',
@@ -88,8 +92,17 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  #hello {
+    margin-bottom: 100px;
+  }
   .slider{
     margin-top: -50px;
     margin-bottom: 50px;
+  }
+  .roundimages {
+    margin-bottom: 75px;
+  }
+  .divider {
+    margin: 75px 0;
   }
 </style>
