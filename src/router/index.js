@@ -5,6 +5,7 @@ import AboutMe from '@/pages/AboutMe';
 import Blog from '@/pages/Blog';
 import Portfolio from '@/pages/Portfolio';
 import Impressum from '@/pages/Impressum';
+import Rotfukspage from '@/pages/portfolio/RotfuksPage';
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/impressum',
       name: 'Impressum',
       component: Impressum,
+    },
+    {
+      path: '/rotfukspage',
+      name: 'Rotfukspage',
+      component: Rotfukspage,
     },
   ],
 });

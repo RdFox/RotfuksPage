@@ -24,8 +24,8 @@
     width: 100%;
   }
  img {
-   width: 64px;
-   height: 64px;
+   width: 100px;
+   height:100px;
  }
  .text {
    white-space: pre-wrap;

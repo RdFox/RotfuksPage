@@ -25,7 +25,7 @@
         <div v-for="blog in blogs" :key="blog.key" :id="blog.key" class="col-12 block">
           <div class="blogspot">
             <cms-embeded-blog :data="blog"></cms-embeded-blog>
-            <span class="delete fa fa-trash" v-on:click="removeBlog(blog)"></span>
+            <span v-if="global.loggedIn" class="delete fa fa-trash" v-on:click="removeBlog(blog)"></span>
           </div>
         </div>
       </div>

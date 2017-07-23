@@ -60,7 +60,7 @@
             img: 'https://cdn.worldvectorlogo.com/logos/xing-icon.svg',
             alt: 'The Xing Logo',
             title: 'Do you want to get in touch?',
-            text: 'If you want to get in touch with me about business stuff you can check out my Xing-Account. It is like LinkedIn. Should I get LinkedIn? I don\'t know. Is it better? \nWrite me! :)',
+            text: 'If you want to get in touch with me about business stuff you can check out my Xing-Account. It is like LinkedIn. Should I get LinkedIn? I don\'t know. Is it better? Write me! :)',
             button: 'My Xing',
             href: 'https://www.xing.com/profile/Dominik_Kress5?sc_o=mxb_p',
           },
@@ -101,8 +101,5 @@
   }
   .roundimages {
     margin-bottom: 75px;
-  }
-  .divider {
-    margin: 75px 0;
   }
 </style>

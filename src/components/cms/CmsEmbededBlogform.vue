@@ -17,7 +17,7 @@
   import firebase from '../../utils/firebase';
   import timeStamp from '../../utils/timestamp';
 
-  const blogRef = firebase.database().ref('blogs');
+  const blogRef = firebase.database().ref('blog/blogs');
 
   export default {
     name: 'CmsEmbededBlogform',
