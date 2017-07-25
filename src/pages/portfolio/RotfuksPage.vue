@@ -18,7 +18,7 @@
       CmsEmbededJumbotron,
       CmsEmbededRoundImagesText,
     },
-    name: 'aboutMe',
+    name: 'rotfukspage',
     data() {
       return {
         welcometext: {
@@ -30,8 +30,12 @@
           '\n\nNext steps are definitely:' +
           '\n\t- Create a new, high-quality Logo\n\t- Implement the functionality of the Flavour Selection in the Blog\n\t- Add more of my old projects to the portfolio\n\t- Build internationalisation by introducing german translation' +
           '\n\nYou can check out the whole Code of this Website. It is completely open source and you can find it on my github page!',
-          href: 'https://github.com/RdFox/RotfuksPage',
-          link: 'Look up the Code',
+          buttons: [
+            {
+              href: 'https://github.com/RdFox/RotfuksPage',
+              link: 'Look up the Code',
+            },
+          ],
         },
         roundimagetexts: [
           {

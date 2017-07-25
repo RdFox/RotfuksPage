@@ -39,8 +39,12 @@
           sitetitle: 'About Me',
           title: 'Who is this Rotfuks everybody is talking about?!',
           text: 'Well, I hope not everybody is talking about me and if so hopefully only the good parts! On this Page you can find out who I am and what I do for a living and for fun.\n\nIf you have any further questions about my person, feel free to contact and ask me in any possible way.\nMaybe write me an email?',
-          href: 'mailto:dk.dkress@gmail.com',
-          link: 'Email Me',
+          buttons: [
+            {
+              href: 'mailto:dk.dkress@gmail.com',
+              link: 'Email Me',
+            },
+          ],
         },
         blocks: [
           {

@@ -1,7 +1,7 @@
 <template>
   <div class="row" id="portfolio">
     <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
-    <div class="sidebar col-3 col-md-2">
+    <div class="sidebar col-md-2">
       <div v-if="global.loggedIn" class="toggle-bar row justify-content-center">
         <label for="toggle">Toggle Entry-Form</label>
         <a id="toggle" class="btn btn-secondary plus-button" v-on:click="toggleForm"><span id="button-icon" class="fa fa-chevron-right"></span></a>
@@ -15,14 +15,14 @@
         </ul>
       </div>
     </div>
-    <div class="content col-12 col-sm-9 col-md-10 ">
+    <div class="content col-12 col-md-10 ">
       <div v-if="global.loggedIn" id="portfolio-form" class="portfolio-form row">
         <cms-portfolio-form></cms-portfolio-form>
       </div>
       <div class="portfolio-entries row">
         <div v-for="entry in entries" :key="entry.id" :id="entry.id" class="col-lg-4 col-sm-6 col-12 entryspot">
           <cms-portfolio-entry :data="entry"></cms-portfolio-entry>
-          <span class="delete fa fa-trash" v-on:click="removeEntry(entry)"></span>
+          <span v-if="global.loggedIn" class="delete fa fa-trash" v-on:click="removeEntry(entry)"></span>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@
     display: flex;
     margin: 30px;
   }
-  @media screen and (min-width: 740px) {
+  @media screen and (min-width: 768px) {
     .sidebar {
       display: block;
       border-right: 1px solid #ccc;
@@ -128,7 +128,7 @@
       padding-left: 25px;
     }
   }
-  @media screen and (max-width: 740px) {
+  @media screen and (max-width: 766px) {
     .sidebar {
       display: none;
     }

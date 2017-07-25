@@ -8,7 +8,13 @@
     <h2 v-if="data.title" v-html="data.title"></h2>
     <p v-if="data.text" v-html="data.text"></p>
     <p v-if="data.button">
-      <b-btn variant="outline-danger" @click="buttonClick" :href="data.href">{{ data.button }}</b-btn>
+      <template v-if="data.download">
+        <b-btn variant="outline-danger" :href="data.href" download>{{ data.button }}</b-btn>
+      </template>
+      <template v-else>
+        <b-btn variant="outline-danger" @click="buttonClick" :href="data.href">{{ data.button }}</b-btn>
+      </template>
+
     </p>
   </div>
 </template>

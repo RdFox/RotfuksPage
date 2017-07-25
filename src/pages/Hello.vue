@@ -56,16 +56,6 @@
         roundimagetexts: [
           {
             classes: 'col-md-4',
-            key: 0,
-            img: 'https://cdn.worldvectorlogo.com/logos/xing-icon.svg',
-            alt: 'The Xing Logo',
-            title: 'Do you want to get in touch?',
-            text: 'If you want to get in touch with me about business stuff you can check out my Xing-Account. It is like LinkedIn. Should I get LinkedIn? I don\'t know. Is it better? Write me! :)',
-            button: 'My Xing',
-            href: 'https://www.xing.com/profile/Dominik_Kress5?sc_o=mxb_p',
-          },
-          {
-            classes: 'col-md-4',
             key: 1,
             img: 'https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png',
             alt: 'The Github Logo',
@@ -73,6 +63,16 @@
             text: 'You can find a lot of my projects on my Github Account. I try to keep as much of my Code open-source as possible. Check it out!',
             button: 'My Github',
             href: 'https://github.com/RdFox',
+          },
+          {
+            classes: 'col-md-4',
+            key: 0,
+            img: 'https://cdn.worldvectorlogo.com/logos/xing-icon.svg',
+            alt: 'The Xing Logo',
+            title: 'Do you want to get in touch?',
+            text: 'If you want to get in touch with me about business stuff you can check out my Xing-Account. It is like LinkedIn. Should I get LinkedIn? I don\'t know. Is it better? Write me! :)',
+            button: 'My Xing',
+            href: 'https://www.xing.com/profile/Dominik_Kress5?sc_o=mxb_p',
           },
           {
             classes: 'col-md-4',

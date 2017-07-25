@@ -3,7 +3,9 @@
     <div class="auto block">
       <h2>{{ data.header }}</h2>
       <p class="lead">{{ data.lead }}</p>
-      <img class="img-fluid rf-img" :src="data.avatar"  :alt="data.header"/>
+      <div class="image">
+        <img class="img-fluid rf-img" :src="data.avatar"  :alt="data.header"/>
+      </div>
       <p class="text">{{ data.text }}</p>
       <b-btn class="button" variant="outline-danger" :href="data.linkhref">{{ data.linktext }}</b-btn>
     </div>
@@ -22,7 +24,11 @@
     border: 1px solid #ccc;
     border-radius: 16px;
   }
+  .image {
+    margin: 5px 20px 20px 20px;
+  }
   img {
-    margin: 0 0 20px 0;
+    display: block;
+    margin: 0 auto;
   }
 </style>
