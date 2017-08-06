@@ -1,7 +1,7 @@
 <template>
   <div id="blog" class="row">
     <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
-    <div class="sidebar col-3 col-md-2">
+    <div class="sidebar col-12 col-md-3">
       <div class="about">
         <h4>About</h4>
         <p><i class="fa fa-wrench" aria-hidden="true"></i> My Blog is - as is the whole Homepage - still under construction. Sorry if anything (like e.g. the flavour selection) is not yet working.</p>
@@ -17,16 +17,14 @@
         <b-form-checkbox v-model="privateblog" v-on:click="changeFlavour">Show Private</b-form-checkbox>
       </b-form-fieldset>
     </div>
-    <div class="content col-12 col-sm-9 col-md-10">
+    <div class="content col-12 col-md-9">
       <div class="row justify-content-center">
-        <div v-if="global.loggedIn" class="col-12 block" id="blogform">
+        <div v-if="global.loggedIn" class="col-12" id="blogform">
           <cms-embeded-blogform></cms-embeded-blogform>
         </div>
-        <div v-for="blog in blogs" :key="blog.key" :id="blog.key" class="col-12 block">
-          <div class="blogspot">
-            <cms-embeded-blog :data="blog"></cms-embeded-blog>
-            <span v-if="global.loggedIn" class="delete fa fa-trash" v-on:click="removeBlog(blog)"></span>
-          </div>
+        <div v-for="blog in blogs" :key="blog.key" :id="blog.key" class="col-12">
+          <span v-if="global.loggedIn" class="delete fa fa-trash" v-on:click="removeBlog(blog)"></span>
+          <cms-embeded-blog :data="blog"></cms-embeded-blog>
         </div>
       </div>
     </div>
@@ -96,21 +94,14 @@
     background-color: #f5f5f5;
     padding: 10px;
   }
-  .block {
-    padding: 10px;
-    max-width: 1040px;
-  }
-  .blogspot {
-    display: flex;
-  }
   .toggle-bar {
     margin: 30px 0;
   }
   .delete {
     cursor: pointer;
-    position: relative;
-    left: -25px;
-    top: 10px;
+    position: absolute;
+    right: 30px;
+    top: 20px;
   }
   .delete:hover {
     color: gray;
@@ -126,18 +117,15 @@
     display: flex;
     margin: 30px;
   }
-  @media screen and (min-width: 740px) {
+  @media screen and (min-width: 768px) {
     .sidebar {
-      display: block;
       border-right: 1px solid #ccc;
     }
-    .content {
-      padding-left: 25px;
-    }
   }
-  @media screen and (max-width: 740px) {
+  @media screen and (max-width: 768px) {
     .sidebar {
-      display: none;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 25px;
     }
   }
 </style>

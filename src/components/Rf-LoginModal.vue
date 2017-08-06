@@ -77,10 +77,11 @@
           if (user) {
             global.login(user);
             toastr.success(`Your Login was successful.
-          Welcome back!`);
+            Welcome back!`);
           } else {
-            global.logout();
-            toastr.success('You logged out successfully!');
+            toastr.error(`Sorry! Something went wrong with your Login!
+            Please Check your Credentials.
+            Errorcode: ${error.code}`);
           }
         }
         firebase.auth().onAuthStateChanged(innerAuthChange);

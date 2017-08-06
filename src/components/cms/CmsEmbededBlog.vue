@@ -1,16 +1,16 @@
 <template>
-  <b-card>
-    <b-media>
-      <div slot="aside">
+  <div class="blog-entry">
+    <div class="row justify-content-center title-segment">
+      <div class="col-auto image">
         <img :src="data.avatar">
-        <br/><br/>
-        <p>Postet on:<br/>
-        {{ data.date }}</p>
       </div>
-      <h5 class="mt-0">{{ data.title }}</h5>
-      <p class="text">{{ data.text }}</p>
-    </b-media>
-  </b-card>
+      <div class="col-auto title-col align-self-center">
+        <p class="title">{{ data.title }}</p>
+        <p class="posted">Postet on: {{ data.date }}</p>
+      </div>
+    </div>
+    <p class="text">{{ data.text }}</p>
+  </div>
 </template>
 
 <script>
@@ -20,14 +20,35 @@
   };
 </script>
 <style scoped>
-  .card {
+  .blog-entry {
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 10px 0;
     width: 100%;
   }
- img {
-   width: 100px;
-   height:100px;
- }
- .text {
-   white-space: pre-wrap;
- }
+  img {
+    max-width: 100px;
+  }
+  .text {
+    white-space: pre-wrap;
+  }
+  .title-segment {
+    margin: 0 0 20px;
+  }
+  .image {
+    margin: 0 20px 20px;
+  }
+  .title-col {
+    max-width: 100%;
+  }
+  .title {
+    font-size: 200%;
+    margin-bottom: 5px;
+    line-height: 90%;
+  }
+  .posted {
+    font-size: 75%;
+    font-style: italic;
+  }
 </style>

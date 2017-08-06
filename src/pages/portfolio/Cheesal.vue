@@ -30,7 +30,7 @@
           '\n\nThe endresult after the 48 hours is still a bit buggy but I want to keep the competition authentic :) You can check out the code on my Github or play the game with the buttons below.',
           buttons: [
             {
-              href: 'https://github.com/esportsgermany/website',
+              href: 'https://github.com/RdFox/Cheesal',
               link: 'Look up the Code',
             },
             {

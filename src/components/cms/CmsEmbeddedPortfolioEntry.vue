@@ -7,7 +7,12 @@
         <img class="img-fluid rf-img" :src="data.avatar"  :alt="data.header"/>
       </div>
       <p class="text">{{ data.text }}</p>
-      <b-btn class="button" variant="outline-danger" :href="data.linkhref">{{ data.linktext }}</b-btn>
+      <template v-if="data.download">
+        <b-btn download class="button" variant="outline-danger" :href="data.linkhref">{{ data.linktext }}</b-btn>
+      </template>
+      <template v-else>
+        <b-btn class="button" variant="outline-danger" :href="data.linkhref">{{ data.linktext }}</b-btn>
+      </template>
     </div>
   </div>
 </template>
