@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Hello from '@/pages/Hello';
 import AboutMe from '@/pages/AboutMe';
 import Blog from '@/pages/Blog';
+import Blogdetail from '@/pages/Blogdetail';
 import Portfolio from '@/pages/Portfolio';
 import Impressum from '@/pages/Impressum';
 import Rotfukspage from '@/pages/portfolio/RotfuksPage';
@@ -31,6 +32,11 @@ export default new Router({
       path: '/blog',
       name: 'Blog',
       component: Blog,
+    },
+    {
+      path: '/blogdetail',
+      name: 'Blogdetail',
+      component: Blogdetail,
     },
     {
       path: '/portfolio',

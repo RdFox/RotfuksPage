@@ -51,7 +51,13 @@
         if (this.newBlog.title && this.newBlog.text) {
           this.newBlog.date = timeStamp();
           this.newBlog.sortkey = (-1 * Date.now());
-          blogRef.push(this.newBlog);
+          let key = '';
+          const newRef = blogRef.push(this.newBlog);
+          const callback = function callback(snap) {
+            key = snap.key;
+          };
+          newRef.once('value', callback);
+          blogRef.child(`${key}/keylink`).set(key);
           this.newBlog.avatar = '';
           this.newBlog.title = '';
           this.newBlog.text = '';

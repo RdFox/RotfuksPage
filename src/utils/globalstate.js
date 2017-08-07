@@ -1,6 +1,7 @@
 const global = {
   loggedIn: false,
   user: {},
+  activeblog: {},
   login: function login(user) {
     this.loggedIn = true;
     this.user = user;

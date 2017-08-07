@@ -9,14 +9,24 @@
         <p class="posted">Postet on: {{ data.date }}</p>
       </div>
     </div>
-    <p class="text">{{ data.text }}</p>
+    <div class="text" v-html="compiledMarkdown"></div>
+    <div class="row justify-content-center">
+      <b-btn variant="outline-danger" :href="'#/blogdetail?blog=' + data.keylink">Read More</b-btn>
+    </div>
   </div>
 </template>
 
 <script>
+  import marked from 'marked';
+
   export default {
     name: 'CmsEmbededBlog',
     props: ['data'],
+    computed: {
+      compiledMarkdown: function compiledMarkdown() {
+        return marked(this.data.text, { sanitize: true });
+      },
+    },
   };
 </script>
 <style scoped>
@@ -32,6 +42,13 @@
   }
   .text {
     white-space: pre-wrap;
+    max-height: 500px;
+    margin-bottom: -20px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    background: -webkit-linear-gradient(#000, #eee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   .title-segment {
     margin: 0 0 20px;

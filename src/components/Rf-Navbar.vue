@@ -79,7 +79,6 @@ export default {
           Welcome back!`);
         } else {
           global.logout();
-          toastr.success('You logged out successfully!');
         }
       }
       firebase.auth().onAuthStateChanged(innerAuthChange);
