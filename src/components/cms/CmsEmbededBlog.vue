@@ -41,7 +41,6 @@
     max-width: 100px;
   }
   .text {
-    white-space: pre-wrap;
     max-height: 500px;
     margin-bottom: -20px;
     overflow:hidden;

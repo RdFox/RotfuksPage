@@ -76,9 +76,6 @@
   img {
     max-width: 100px;
   }
-  .text {
-    white-space: pre-wrap;
-  }
   .title-segment {
     margin: 0 0 20px;
   }
