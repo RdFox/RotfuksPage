@@ -5,7 +5,7 @@
       <p class="caption" v-if="caption" v-html="caption"></p>
       <p v-if="text" v-html="text"></p>
       <p v-if="button">
-        <b-btn class="button" variant="danger" :href="href" @click="slideClick">{{ button }}</b-btn>
+        <b-btn class="button" variant="danger" :href="href">{{ button }}</b-btn>
       </p>
       <slot></slot>
     </div>
@@ -44,17 +44,6 @@
       },
       textalign: {
         type: String,
-      },
-    },
-    methods: {
-      slideClick() {
-        const isExternal = /^(http(s?):)?\/\//.test(this.url);
-
-        if (isExternal) {
-          window.open(this.url, '_blank');
-        } else {
-          location.href = this.url;
-        }
       },
     },
   };

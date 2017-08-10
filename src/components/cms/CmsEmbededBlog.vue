@@ -6,7 +6,7 @@
       </div>
       <div class="col-auto title-col align-self-center">
         <p class="title">{{ data.title }}</p>
-        <p class="posted">Postet on: {{ data.date }}</p>
+        <p class="posted">Posted on: {{ data.date }}</p>
       </div>
     </div>
     <div class="text" v-html="compiledMarkdown"></div>
