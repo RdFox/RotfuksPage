@@ -4,8 +4,8 @@
     <div class="sidebar col-12 col-md-3">
       <div class="about">
         <h4>About</h4>
-        <p><i class="fa fa-wrench" aria-hidden="true"></i> My Blog is - as is the whole Homepage - still under construction. Sorry if anything (like e.g. the flavour selection) is not yet working.</p>
-        <p>I am trying to get it to work as fast as possible but this is not my only project. Thanks! :)</p>
+        <p><i class="fa fa-heart-o" aria-hidden="true"></i> If you like a Blog Entry you can now 'Heart' him. And you can not only heart once but as often as you like - because sometimes something is just 3 hearts good. :D</p>
+        <p>With that system you can now take influence and show me directly which kind of content you'd like to see more on my blog. This is part of my feedback-plan, where's also a comment function planned. So have fun participating! :)</p>
       </div>
       <div v-if="global.loggedIn" class="toggle-bar row justify-content-center">
         <label for="toggle" class="toggle-label">Toggle Blog-Form</label>
@@ -22,7 +22,7 @@
         <div v-if="global.loggedIn" class="col-12" id="blogform">
           <cms-embeded-blogform></cms-embeded-blogform>
         </div>
-        <div v-for="blog in blogs" :key="blog.key" :id="blog.key" class="col-12">
+        <div v-for="blog in filteredBlogs" :key="blog.key" :id="blog.key" class="col-12">
           <div class="delete">
             <span>{{ blog.open.votes }}</span>
             <span class="fa fa-heart-o" v-on:click="upvote(blog)"></span>
@@ -64,12 +64,32 @@
       return {
         global,
         label: 'Choose Your Flavours:',
-        desc: 'Which Category do you want to read? (Not yet functional, Sorry!)',
+        desc: 'Which Category do you want to read?',
         selected: [],
         tecblog: true,
         eventblog: true,
         privateblog: true,
       };
+    },
+    computed: {
+      filteredBlogs: function filteredBlogs() {
+        const blogs = {};
+        const tec = this.tecblog;
+        const event = this.eventblog;
+        const priv = this.privateblog;
+        blogRef.orderByChild('sortkey').once('value', (snapshot) => {
+          snapshot.forEach((childSnapshot) => {
+            const childKey = childSnapshot.key;
+            const childData = childSnapshot.val();
+            if ((childData.category === 'tec' && tec) ||
+              (childData.category === 'event' && event) ||
+              (childData.category === 'personal' && priv)) {
+              blogs[childKey] = childData;
+            }
+          });
+        });
+        return blogs;
+      },
     },
     methods: {
       remove: function remove(blog) {
@@ -95,9 +115,6 @@
           blogform.style.display = 'none';
           buttonicon.setAttribute('class', 'fa fa-chevron-right');
         }
-      },
-      changeFlavour: function changeFlavour() {
-        toastr.error('Sorry, that is not working yet!');
       },
     },
   };
