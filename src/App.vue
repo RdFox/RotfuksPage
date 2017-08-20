@@ -8,6 +8,8 @@
 
 <script>
   import toastr from 'toastr';
+  import firebase from './utils/firebase';
+  import global from './utils/globalstate';
   import RfNavbar from './components/Rf-Navbar';
   import RfFooter from './components/Rf-Footer';
 
@@ -18,6 +20,16 @@
     },
     name: 'app',
     created: function created() {
+      // Login - Change
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          global.login(user);
+          toastr.success(`Your Login was successful.
+          Welcome back!`);
+        }
+      });
+
+      // Work in progress toastr
       toastr.options.closeButton = true;
       toastr.options.progressBar = true;
       toastr.options.timeOut = 18000;

@@ -1,7 +1,12 @@
 const global = {
   loggedIn: false,
   user: {},
-  activeblog: {},
+  activeblog: {
+    text: '',
+    open: {
+      votes: 0,
+    },
+  },
   login: function login(user) {
     this.loggedIn = true;
     this.user = user;

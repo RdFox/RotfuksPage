@@ -13,7 +13,6 @@
 <script>
   import toastr from 'toastr';
   import firebase from '../utils/firebase';
-  import global from '../utils/globalstate';
 
   export default {
     name: 'rf-login-modal',
@@ -40,7 +39,16 @@
             return e.cancel();
           }
           firebase.auth().signInWithEmailAndPassword(this.login.email,
-            this.login.password).catch(this.loginCallback(e));
+            this.login.password).catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              if (errorCode) {
+                toastr.error(`Sorry! Something went wrong with your Login!
+                    Error is: ${errorMessage}`);
+                return e.cancel();
+              }
+              return true;
+            });
         } else {
           if (!this.register.email || !this.register.password ||
             !this.register.passwordRepeat || !this.register.agb) {
@@ -52,39 +60,19 @@
             return e.cancel();
           }
           firebase.auth().createUserWithEmailAndPassword(this.register.email,
-            this.register.password).catch(this.registerCallback(e));
+            this.register.password).catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              if (errorCode) {
+                toastr.error(`Sorry! Something went wrong with your Registration!
+                  Error is: ${errorMessage}`);
+                return e.cancel();
+              }
+              toastr.success(`Your Registration was successful.
+                Welcome! You can now Login!`);
+              return true;
+            });
         }
-        return true;
-      },
-      registerCallback: function registerCallback(error, e) {
-        if (error.code) {
-          toastr.error(`Sorry! Something went wrong with your Registration!
-          Errorcode: ${error.code}`);
-          return e.cancel();
-        }
-        toastr.success(`Your Registration was successful.
-        Welcome! You can now Login!`);
-        return true;
-      },
-      loginCallback: function loginCallback(error, e) {
-        if (error.code) {
-          toastr.error(`Sorry! Something went wrong with your Login!
-          Please Check your Credentials.
-          Errorcode: ${error.code}`);
-          return e.cancel();
-        }
-        function innerAuthChange(user) {
-          if (user) {
-            global.login(user);
-            toastr.success(`Your Login was successful.
-            Welcome back!`);
-          } else {
-            toastr.error(`Sorry! Something went wrong with your Login!
-            Please Check your Credentials.
-            Errorcode: ${error.code}`);
-          }
-        }
-        firebase.auth().onAuthStateChanged(innerAuthChange);
         return true;
       },
     },

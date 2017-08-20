@@ -1,6 +1,10 @@
 <template>
   <div id="blogdetail">
     <div class="blog-entry">
+      <div class="delete">
+        <span>{{ global.activeblog.open.votes }}</span>
+        <span class="fa fa-heart-o" v-on:click="upvote(blog)"></span>
+      </div>
       <div class="row justify-content-center title-segment">
         <div class="col-auto image">
           <img :src="global.activeblog.avatar">
@@ -56,6 +60,18 @@
       }
       blogsRef.child(gup('blog', document.location.href)).once('value', successCallback);
     },
+    methods: {
+      upvote: function upvote() {
+        blogsRef.child(global.activeblog.keylink).child('open').transaction((open) => {
+          if (open) {
+            // eslint-disable-next-line
+            open.votes++;
+            global.activeblog.open.votes = open.votes;
+          }
+          return open;
+        });
+      },
+    },
   };
 </script>
 <style scoped>
@@ -93,5 +109,14 @@
   .posted {
     font-size: 75%;
     font-style: italic;
+  }
+  .delete {
+    cursor: pointer;
+    position: relative;
+    text-align: right;
+    margin-bottom: -15px;
+  }
+  .delete > span:hover {
+    color: gray;
   }
 </style>

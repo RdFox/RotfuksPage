@@ -23,7 +23,11 @@
           <cms-embeded-blogform></cms-embeded-blogform>
         </div>
         <div v-for="blog in blogs" :key="blog.key" :id="blog.key" class="col-12">
-          <span v-if="global.loggedIn" class="delete fa fa-trash" v-on:click="removeBlog(blog)"></span>
+          <div class="delete">
+            <span>{{ blog.open.votes }}</span>
+            <span class="fa fa-heart-o" v-on:click="upvote(blog)"></span>
+            <span v-if="global.loggedIn" class="fa fa-trash" v-on:click="remove(blog)"></span>
+          </div>
           <cms-embeded-blog :data="blog"></cms-embeded-blog>
         </div>
       </div>
@@ -68,9 +72,18 @@
       };
     },
     methods: {
-      removeBlog: function removeBlog(blog) {
+      remove: function remove(blog) {
         blogRef.child(blog['.key']).remove();
         toastr.error('Blog removed!');
+      },
+      upvote: function upvote(update) {
+        blogRef.child(update['.key']).child('open').transaction((open) => {
+          if (open) {
+            // eslint-disable-next-line
+            open.votes++;
+          }
+          return open;
+        });
       },
       toggleForm: function toggleForm() {
         const blogform = document.getElementById('blogform');
@@ -103,7 +116,7 @@
     right: 30px;
     top: 20px;
   }
-  .delete:hover {
+  .delete > span:hover {
     color: gray;
   }
   .plus-button {

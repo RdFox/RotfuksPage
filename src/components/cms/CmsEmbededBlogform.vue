@@ -51,6 +51,7 @@
         if (this.newBlog.title && this.newBlog.text) {
           this.newBlog.date = timeStamp();
           this.newBlog.sortkey = (-1 * Date.now());
+          this.newBlog.open.votes = 0;
           let key = '';
           const newRef = blogRef.push(this.newBlog);
           const callback = function callback(snap) {
