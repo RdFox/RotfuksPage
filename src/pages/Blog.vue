@@ -1,6 +1,9 @@
 <template>
   <div id="blog" class="row">
     <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
+    <div class="col-12">
+      {{ filteredBlogs }}
+    </div>
     <div class="sidebar col-12 col-md-3">
       <div class="about">
         <h4>About</h4>
@@ -12,9 +15,9 @@
         <a id="toggle" class="btn btn-secondary plus-button" v-on:click="toggleForm"><span id="button-icon" class="fa fa-chevron-right"></span></a>
       </div>
       <b-form-fieldset id="flavours" :label="label" :description="desc">
-        <b-form-checkbox v-model="tecblog" v-on:click="changeFlavour">Show Tec</b-form-checkbox>
-        <b-form-checkbox v-model="eventblog" v-on:click="changeFlavour">Show Event</b-form-checkbox>
-        <b-form-checkbox v-model="privateblog" v-on:click="changeFlavour">Show Private</b-form-checkbox>
+        <b-form-checkbox v-model="tecblog">Show Tec</b-form-checkbox>
+        <b-form-checkbox v-model="eventblog">Show Event</b-form-checkbox>
+        <b-form-checkbox v-model="privateblog">Show Private</b-form-checkbox>
       </b-form-fieldset>
     </div>
     <div class="content col-12 col-md-9">
@@ -22,14 +25,14 @@
         <div v-if="global.loggedIn" class="col-12" id="blogform">
           <cms-embeded-blogform></cms-embeded-blogform>
         </div>
-        <div v-for="blog in filteredBlogs" :key="blog.key" :id="blog.key" class="col-12">
-          <div class="delete">
-            <span>{{ blog.open.votes }}</span>
-            <span class="fa fa-heart-o" v-on:click="upvote(blog)"></span>
-            <span v-if="global.loggedIn" class="fa fa-trash" v-on:click="remove(blog)"></span>
+          <div v-for="blog in filteredBlogs" :key="blog.keylink" :id="blog.keylink" class="col-12">
+            <div class="delete">
+              <span>{{ blog.open.votes }}</span>
+              <span class="fa fa-heart-o" v-on:click="upvote(blog)"></span>
+              <span v-if="global.loggedIn" class="fa fa-trash" v-on:click="remove(blog)"></span>
+            </div>
+            <cms-embeded-blog :data="blog"></cms-embeded-blog>
           </div>
-          <cms-embeded-blog :data="blog"></cms-embeded-blog>
-        </div>
       </div>
     </div>
   </div>
@@ -69,26 +72,41 @@
         tecblog: true,
         eventblog: true,
         privateblog: true,
+        currentPage: 0,
       };
     },
+    created: function created() {
+      this.tecblog = false;
+      this.eventblog = false;
+      this.privateblog = false;
+      this.tecblog = true;
+      this.eventblog = true;
+      this.privateblog = true;
+    },
     computed: {
-      filteredBlogs: function filteredBlogs() {
-        const blogs = {};
-        const tec = this.tecblog;
-        const event = this.eventblog;
-        const priv = this.privateblog;
-        blogRef.orderByChild('sortkey').once('value', (snapshot) => {
-          snapshot.forEach((childSnapshot) => {
-            const childKey = childSnapshot.key;
-            const childData = childSnapshot.val();
-            if ((childData.category === 'tec' && tec) ||
-              (childData.category === 'event' && event) ||
-              (childData.category === 'personal' && priv)) {
-              blogs[childKey] = childData;
-            }
+      filteredBlogs: {
+        cache: false,
+        get() {
+          const blogs = {};
+          const tec = this.tecblog;
+          const event = this.eventblog;
+          const priv = this.privateblog;
+          blogRef.orderByChild('sortkey').once('value', (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+              const childKey = childSnapshot.key;
+              const childData = childSnapshot.val();
+              if ((childData.category === 'tec' && tec) ||
+                (childData.category === 'event' && event) ||
+                (childData.category === 'personal' && priv)) {
+                blogs[childKey] = childData;
+              }
+            });
           });
-        });
-        return blogs;
+          // eslint-disable-next-line
+          console.log(blogs);
+          toastr.success('computed!');
+          return blogs;
+        },
       },
     },
     methods: {
