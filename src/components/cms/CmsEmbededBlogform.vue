@@ -43,6 +43,7 @@
           title: '',
           text: '',
           category: 'tec',
+          open: {},
         },
       };
     },
