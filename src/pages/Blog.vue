@@ -1,9 +1,6 @@
 <template>
   <div id="blog" class="row">
     <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
-    <div class="col-12">
-      {{ filteredBlogs }}
-    </div>
     <div class="sidebar col-12 col-md-3">
       <div class="about">
         <h4>About</h4>
@@ -15,9 +12,9 @@
         <a id="toggle" class="btn btn-secondary plus-button" v-on:click="toggleForm"><span id="button-icon" class="fa fa-chevron-right"></span></a>
       </div>
       <b-form-fieldset id="flavours" :label="label" :description="desc">
-        <b-form-checkbox v-model="tecblog">Show Tec</b-form-checkbox>
-        <b-form-checkbox v-model="eventblog">Show Event</b-form-checkbox>
-        <b-form-checkbox v-model="privateblog">Show Private</b-form-checkbox>
+        <b-form-checkbox v-model="filter" value="tec">Show Tec</b-form-checkbox>
+        <b-form-checkbox v-model="filter" value="event">Show Event</b-form-checkbox>
+        <b-form-checkbox v-model="filter" value="personal">Show Private</b-form-checkbox>
       </b-form-fieldset>
     </div>
     <div class="content col-12 col-md-9">
@@ -68,45 +65,13 @@
         global,
         label: 'Choose Your Flavours:',
         desc: 'Which Category do you want to read?',
-        selected: [],
-        tecblog: true,
-        eventblog: true,
-        privateblog: true,
+        filter: ['tec', 'event', 'personal'],
         currentPage: 0,
       };
     },
-    created: function created() {
-      this.tecblog = false;
-      this.eventblog = false;
-      this.privateblog = false;
-      this.tecblog = true;
-      this.eventblog = true;
-      this.privateblog = true;
-    },
     computed: {
-      filteredBlogs: {
-        cache: false,
-        get() {
-          const blogs = {};
-          const tec = this.tecblog;
-          const event = this.eventblog;
-          const priv = this.privateblog;
-          blogRef.orderByChild('sortkey').once('value', (snapshot) => {
-            snapshot.forEach((childSnapshot) => {
-              const childKey = childSnapshot.key;
-              const childData = childSnapshot.val();
-              if ((childData.category === 'tec' && tec) ||
-                (childData.category === 'event' && event) ||
-                (childData.category === 'personal' && priv)) {
-                blogs[childKey] = childData;
-              }
-            });
-          });
-          // eslint-disable-next-line
-          console.log(blogs);
-          toastr.success('computed!');
-          return blogs;
-        },
+      filteredBlogs() {
+        return this.blogs.filter(blog => this.filter.includes(blog.category));
       },
     },
     methods: {
