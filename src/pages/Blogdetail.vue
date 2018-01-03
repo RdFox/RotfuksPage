@@ -53,12 +53,9 @@
         const results = regex.exec(url);
         return results === null ? null : results[1];
       }
-      function successCallback(snap) {
-        // eslint-disable-next-line
-        console.log(snap.val(), global.activeblog);
+      blogsRef.child(gup('blog', document.location.href)).once('value', (snap) => {
         global.activeblog = snap.val();
-      }
-      blogsRef.child(gup('blog', document.location.href)).once('value', successCallback);
+      });
     },
     methods: {
       upvote: function upvote() {

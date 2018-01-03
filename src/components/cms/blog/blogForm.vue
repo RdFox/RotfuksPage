@@ -14,8 +14,8 @@
 
 <script>
   import toastr from 'toastr';
-  import firebase from '../../utils/firebase';
-  import timeStamp from '../../utils/timestamp';
+  import firebase from '../../../utils/firebase';
+  import timeStamp from '../../../utils/timestamp';
 
   const blogRef = firebase.database().ref('blog/blogs');
 
@@ -55,14 +55,13 @@
           this.newBlog.open.votes = 0;
           let key = '';
           const newRef = blogRef.push(this.newBlog);
-          const callback = function callback(snap) {
+          newRef.once('value', (snap) => {
             key = snap.key;
-          };
-          newRef.once('value', callback);
+          });
           blogRef.child(`${key}/keylink`).set(key);
-          this.newBlog.avatar = '';
-          this.newBlog.title = '';
-          this.newBlog.text = '';
+          this.newBlog = {
+            text: '',
+          };
           toastr.success('Blog added!');
         } else {
           toastr.warning('Please fill out at least Title and Text!');

@@ -24,8 +24,8 @@
 </template>
 
 <script>
-  import CmsEmbededJumbotron from '../components/cms/CmsEmbededJumbotron';
-  import CmsEmbededImage from '../components/cms/CmsEmbededImage';
+  import CmsEmbededJumbotron from '../components/cms/generell/embededJumbotron';
+  import CmsEmbededImage from '../components/cms/generell/embededImage';
 
   export default {
     components: {

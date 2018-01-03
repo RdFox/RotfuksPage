@@ -1,6 +1,6 @@
 <template>
   <div id="cheesal">
-    <iframe src="http://cheesal.rotfuks.de" width="100%" height="450px"></iframe>
+    <iframe src="https://cheesal.rotfuks.de" width="100%" height="450px"></iframe>
   </div>
 </template>
 

@@ -10,8 +10,8 @@
 </template>
 
 <script>
-  import CmsEmbededJumbotron from '../../components/cms/CmsEmbededJumbotron';
-  import CmsEmbededRoundImagesText from '../../components/cms/CmsEmbededRoundImageText';
+  import CmsEmbededJumbotron from '../../components/cms/generell/embededJumbotron';
+  import CmsEmbededRoundImagesText from '../../components/cms/generell/embededRoundImageText';
 
   export default {
     components: {
@@ -32,10 +32,6 @@
             {
               href: 'https://github.com/RdFox/Cheesal',
               link: 'Look up the Code',
-            },
-            {
-              href: '#/cheesal/play',
-              link: 'Play Cheesal',
             },
           ],
         },

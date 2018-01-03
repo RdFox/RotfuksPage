@@ -2,7 +2,7 @@
   <div class="row" id="portfolio">
     <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
     <div class="sidebar col-md-2">
-      <div v-if="global.loggedIn" class="toggle-bar row justify-content-center">
+      <div v-if="global.admin" class="toggle-bar row justify-content-center">
         <label for="toggle">Toggle Entry-Form</label>
         <a id="toggle" class="btn btn-secondary plus-button" v-on:click="toggleForm"><span id="button-icon" class="fa fa-chevron-right"></span></a>
       </div>
@@ -16,13 +16,13 @@
       </div>
     </div>
     <div class="content col-12 col-md-10 ">
-      <div v-if="global.loggedIn" id="portfolio-form" class="portfolio-form row">
+      <div v-if="global.admin" id="portfolio-form" class="portfolio-form row">
         <cms-portfolio-form></cms-portfolio-form>
       </div>
       <div class="portfolio-entries row">
         <div v-for="entry in entries" :key="entry.id" :id="entry.id" class="col-lg-4 col-sm-6 col-12 entryspot">
           <cms-portfolio-entry :data="entry"></cms-portfolio-entry>
-          <span v-if="global.loggedIn" class="delete fa fa-trash" v-on:click="removeEntry(entry)"></span>
+          <span v-if="global.admin" class="delete fa fa-trash" v-on:click="removeEntry(entry)"></span>
         </div>
       </div>
     </div>
@@ -34,9 +34,9 @@
   import firebase from '../utils/firebase';
   import global from '../utils/globalstate';
 
-  import CmsPortfolioEntry from '../components/cms/CmsEmbeddedPortfolioEntry';
-  import CmsPortfolioForm from '../components/cms/CmsEmbeddedPortfolioForm';
-  import CmsEmbededJumbotron from '../components/cms/CmsEmbededJumbotron';
+  import CmsPortfolioEntry from '../components/cms/portfolio/portfolioEntry';
+  import CmsPortfolioForm from '../components/cms/portfolio/portfolioForm';
+  import CmsEmbededJumbotron from '../components/cms/generell/embededJumbotron';
 
   const entriesRef = firebase.database().ref('portfolio/entries');
 

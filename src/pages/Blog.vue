@@ -5,9 +5,9 @@
       <div class="about">
         <h4>About</h4>
         <p><i class="fa fa-heart-o" aria-hidden="true"></i> If you like a Blog Entry you can now 'Heart' him. And you can not only heart once but as often as you like - because sometimes something is just 3 hearts good. :D</p>
-        <p>With that system you can now take influence and show me directly which kind of content you'd like to see more on my blog. This is part of my feedback-plan, where's also a comment function planned. So have fun participating! :)</p>
+        <p>Also you can now comment on Blog-Entrys in the Entry-Detail page. You just need to register or login if you already registered. So have fun participating! :)</p>
       </div>
-      <div v-if="global.loggedIn" class="toggle-bar row justify-content-center">
+      <div v-if="global.admin" class="toggle-bar row justify-content-center">
         <label for="toggle" class="toggle-label">Toggle Blog-Form</label>
         <a id="toggle" class="btn btn-secondary plus-button" v-on:click="toggleForm"><span id="button-icon" class="fa fa-chevron-right"></span></a>
       </div>
@@ -19,14 +19,14 @@
     </div>
     <div class="content col-12 col-md-9">
       <div class="row justify-content-center">
-        <div v-if="global.loggedIn" class="col-12" id="blogform">
+        <div v-if="global.admin" class="col-12" id="blogform">
           <cms-embeded-blogform></cms-embeded-blogform>
         </div>
           <div v-for="blog in filteredBlogs" :key="blog.keylink" :id="blog.keylink" class="col-12">
             <div class="delete">
               <span>{{ blog.open.votes }}</span>
               <span class="fa fa-heart-o" v-on:click="upvote(blog)"></span>
-              <span v-if="global.loggedIn" class="fa fa-trash" v-on:click="remove(blog)"></span>
+              <span v-if="global.admin" class="fa fa-trash" v-on:click="remove(blog)"></span>
             </div>
             <cms-embeded-blog :data="blog"></cms-embeded-blog>
           </div>
@@ -38,9 +38,9 @@
 <script>
   import toastr from 'toastr';
 
-  import CmsEmbededBlog from '../components/cms/CmsEmbededBlog';
-  import CmsEmbededBlogform from '../components/cms/CmsEmbededBlogform';
-  import CmsEmbededJumbotron from '../components/cms/CmsEmbededJumbotron';
+  import CmsEmbededBlog from '../components/cms/blog/blogEntry';
+  import CmsEmbededBlogform from '../components/cms/blog/blogForm';
+  import CmsEmbededJumbotron from '../components/cms/generell/embededJumbotron';
   import firebase from '../utils/firebase';
   import global from '../utils/globalstate';
 

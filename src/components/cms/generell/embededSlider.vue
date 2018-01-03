@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import RFCarouselSlide from '../Rf-CarouselSlide';
+  import RFCarouselSlide from '../../Rf-CarouselSlide';
 
   export default {
     name: 'CmsSlider',

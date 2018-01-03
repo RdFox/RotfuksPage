@@ -18,7 +18,7 @@
 
 <script>
   import toastr from 'toastr';
-  import firebase from '../../utils/firebase';
+  import firebase from '../../../utils/firebase';
 
   const entryRef = firebase.database().ref('portfolio/entries');
 
@@ -41,12 +41,7 @@
       addEntry: function addEntry() {
         if (this.newEntry.header && this.newEntry.text) {
           entryRef.push(this.newEntry);
-          this.newEntry.header = '';
-          this.newEntry.lead = '';
-          this.newEntry.text = '';
-          this.newEntry.linkhref = '';
-          this.newEntry.linktext = '';
-          this.newEntry.avatar = '';
+          this.newEntry = {};
           toastr.success('Entry added!');
         } else {
           toastr.warning('Please fill out at least Header and Text!');

@@ -13,8 +13,8 @@
 
 <script>
   import global from '../utils/globalstate';
-  import CmsSlider from '../components/cms/CmsSlider';
-  import CmsEmbededRoundImageText from '../components/cms/CmsEmbededRoundImageText';
+  import CmsSlider from '../components/cms/generell/embededSlider';
+  import CmsEmbededRoundImageText from '../components/cms/generell/embededRoundImageText';
 
   export default {
     components: {
