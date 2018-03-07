@@ -1,6 +1,6 @@
 <template>
   <div id="aboutme" class="row">
-    <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
+    <rf-jumbotron :data="welcometext" />
     <div class="cv-part container">
       <template v-for="block in blocks" :v-key="block.caption.title" >
         <div class="row">
@@ -24,13 +24,13 @@
 </template>
 
 <script>
-  import CmsEmbededJumbotron from '../components/cms/generell/embededJumbotron';
-  import CmsEmbededImage from '../components/cms/generell/embededImage';
+  import RfJumbotron from '../components/cms/generell/Rf-Jumbotron';
+  import RfImage from '../components/cms/generell/Rf-Image';
 
   export default {
     components: {
-      CmsEmbededImage,
-      CmsEmbededJumbotron,
+      RfImage,
+      RfJumbotron,
     },
     name: 'aboutMe',
     data() {

@@ -1,22 +1,22 @@
 <template>
   <div id="rotfukspage">
-    <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
+    <rf-jumbotron :data="welcometext" />
     <div class="row roundimages">
       <template v-for="roundimagetext in roundimagetexts" >
-        <cms-embeded-round-images-text :v-key="roundimagetext.key" :data="roundimagetext"></cms-embeded-round-images-text>
+        <rf-rounded-image-panel :v-key="roundimagetext.key" :data="roundimagetext" />
       </template>
     </div>
   </div>
 </template>
 
 <script>
-  import CmsEmbededJumbotron from '../../components/cms/generell/embededJumbotron';
-  import CmsEmbededRoundImagesText from '../../components/cms/generell/embededRoundImageText';
+  import RfJumbotron from '../../components/cms/generell/Rf-Jumbotron';
+  import RfRoundedImagePanel from '../../components/cms/generell/Rf-RoundImagePanel';
 
   export default {
     components: {
-      CmsEmbededJumbotron,
-      CmsEmbededRoundImagesText,
+      RfJumbotron,
+      RfRoundedImagePanel,
     },
     name: 'rotfukspage',
     data() {
@@ -27,8 +27,6 @@
           text: 'This Website is built with Vue.js as Single Page Application. The Backend is provided in style of Backend as a Service (BaaS) by Googles Firebase and can be accessed via a simple REST-Api call. This website uses the cloud-hosted, realtime NoSQL Database of Firebase for saving data. Firebase also handles the user authentication of this application. For a better integration of Firebase into Vue.js this web-app also uses the framework Vuefire.' +
           '\n\nSome of the frontend components are styled via bootstrapVue which transfers the known bootstrap v4 framework to the performant vue.js framework. The messages for successful operations are built with Toastr and for some special icons Fontawesome is integrated. You can find more information about the technologies I used to built this website down below.' +
           '\n\nThis website is not yet final. There is a lot to improve, but it is only a side project, so maintaining and improving it takes two times the time. :)' +
-          '\n\nNext steps are definitely:' +
-          '\n\t- Create a new, high-quality Logo\n\t- Implement the functionality of the Flavour Selection in the Blog\n\t- Add more of my old projects to the portfolio\n\t- Build internationalisation by introducing german translation' +
           '\n\nYou can check out the whole Code of this Website. It is completely open source and you can find it on my github page!',
           buttons: [
             {

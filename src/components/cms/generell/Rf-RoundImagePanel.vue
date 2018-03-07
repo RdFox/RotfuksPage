@@ -1,5 +1,5 @@
 <template>
-  <div :class="data.classes + ' cms-embeded-roundimage-text'">
+  <div :class="data.classes + ' rf-round-image-panel'">
     <div class="row justify-content-center">
       <div class="auto">
         <img class="rounded-circle" :src="data.img" :alt="data.alt" width="140" height="140">
@@ -9,10 +9,10 @@
     <p v-if="data.text" v-html="data.text"></p>
     <p v-if="data.button">
       <template v-if="data.download">
-        <b-btn variant="outline-danger" :href="data.href" download>{{ data.button }}</b-btn>
+        <b-button variant="outline-primary" :href="data.href" download>{{ data.button }}</b-button>
       </template>
       <template v-else>
-        <b-btn variant="outline-danger" @click="buttonClick" :href="data.href">{{ data.button }}</b-btn>
+        <b-button variant="outline-danger" @click="buttonClick" :href="data.href">{{ data.button }}</b-button>
       </template>
 
     </p>
@@ -21,7 +21,7 @@
 
 <script>
   export default {
-    name: 'CmsEmbededText',
+    name: 'rf-round-image-panel',
     props: ['data'],
     methods: {
       buttonClick() {
@@ -37,10 +37,14 @@
   };
 </script>
 <style scoped>
-  .cms-embeded-roundimage-text {
+  .rf-round-image-panel {
     padding: 30px;
   }
   .rounded-circle {
     margin: 10px;
   }
+  .btn-outline-danger {
+    border-color: #dc3545;
+  }
+
 </style>

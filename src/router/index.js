@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Hello from '@/pages/Hello';
-import AboutMe from '@/pages/AboutMe';
+import RfSite from '@/pages/Rf-Site';
 import Blog from '@/pages/Blog';
 import Blogdetail from '@/pages/Blogdetail';
 import Portfolio from '@/pages/Portfolio';
@@ -9,10 +9,8 @@ import Impressum from '@/pages/Impressum';
 import Rotfukspage from '@/pages/portfolio/RotfuksPage';
 import WormDL from '@/pages/portfolio/WormDL';
 import Falltown from '@/pages/portfolio/Falltown';
-import FalltownPlay from '@/pages/portfolio/FalltownPlay';
 import EsgWebsite from '@/pages/portfolio/EsgWebsite';
 import Cheesal from '@/pages/portfolio/Cheesal';
-import CheesalPlay from '@/pages/portfolio/CheesalPlay';
 
 Vue.use(Router);
 
@@ -26,7 +24,8 @@ export default new Router({
     {
       path: '/aboutme',
       name: 'AboutMe',
-      component: AboutMe,
+      component: RfSite,
+      props: { siteRef: 'aboutMe' },
     },
     {
       path: '/blog',
@@ -64,11 +63,6 @@ export default new Router({
       component: Falltown,
     },
     {
-      path: '/falltown/play',
-      name: 'FalltownPlay',
-      component: FalltownPlay,
-    },
-    {
       path: '/esgwebsite',
       name: 'EsgWebsite',
       component: EsgWebsite,
@@ -77,11 +71,6 @@ export default new Router({
       path: '/cheesal',
       name: 'Cheesal',
       component: Cheesal,
-    },
-    {
-      path: '/cheesal/play',
-      name: 'CheesalPlay',
-      component: CheesalPlay,
     },
   ],
 });

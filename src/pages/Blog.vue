@@ -1,6 +1,7 @@
 <template>
   <div id="blog" class="row">
-    <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
+    {{ global.admin }}
+    <rf-jumbotron :data="welcometext" />
     <div class="sidebar col-12 col-md-3">
       <div class="about">
         <h4>About</h4>
@@ -11,16 +12,15 @@
         <label for="toggle" class="toggle-label">Toggle Blog-Form</label>
         <a id="toggle" class="btn btn-secondary plus-button" v-on:click="toggleForm"><span id="button-icon" class="fa fa-chevron-right"></span></a>
       </div>
-      <b-form-fieldset id="flavours" :label="label" :description="desc">
-        <b-form-checkbox v-model="filter" value="tec">Show Tec</b-form-checkbox>
-        <b-form-checkbox v-model="filter" value="event">Show Event</b-form-checkbox>
-        <b-form-checkbox v-model="filter" value="personal">Show Private</b-form-checkbox>
-      </b-form-fieldset>
+      <b-form-group id="flavours" :label="label" :description="desc">
+        <b-form-checkbox-group name="flavour1" v-model="filter" :options="options">
+        </b-form-checkbox-group>
+      </b-form-group>
     </div>
     <div class="content col-12 col-md-9">
       <div class="row justify-content-center">
         <div v-if="global.admin" class="col-12" id="blogform">
-          <cms-embeded-blogform></cms-embeded-blogform>
+          <blog-form></blog-form>
         </div>
           <div v-for="blog in filteredBlogs" :key="blog.keylink" :id="blog.keylink" class="col-12">
             <div class="delete">
@@ -28,7 +28,7 @@
               <span class="fa fa-heart-o" v-on:click="upvote(blog)"></span>
               <span v-if="global.admin" class="fa fa-trash" v-on:click="remove(blog)"></span>
             </div>
-            <cms-embeded-blog :data="blog"></cms-embeded-blog>
+            <blog-entry :data="blog" />
           </div>
       </div>
     </div>
@@ -38,19 +38,20 @@
 <script>
   import toastr from 'toastr';
 
-  import CmsEmbededBlog from '../components/cms/blog/blogEntry';
-  import CmsEmbededBlogform from '../components/cms/blog/blogForm';
-  import CmsEmbededJumbotron from '../components/cms/generell/embededJumbotron';
   import firebase from '../utils/firebase';
   import global from '../utils/globalstate';
+
+  import BlogEntry from '../components/cms/blog/blogEntry';
+  import BlogForm from '../components/cms/blog/blogForm';
+  import RfJumbotron from '../components/cms/generell/Rf-Jumbotron';
 
   const blogRef = firebase.database().ref('blog/blogs');
 
   export default {
     components: {
-      CmsEmbededBlog,
-      CmsEmbededBlogform,
-      CmsEmbededJumbotron,
+      BlogEntry,
+      BlogForm,
+      RfJumbotron,
     },
     firebase: {
       welcometext: {
@@ -66,6 +67,11 @@
         label: 'Choose Your Flavours:',
         desc: 'Which Category do you want to read?',
         filter: ['tec', 'event', 'personal'],
+        options: [
+          { text: 'Show Tec', value: 'tec' },
+          { text: 'Show Event', value: 'event' },
+          { text: 'Show Private', value: 'personal' },
+        ],
         currentPage: 0,
       };
     },

@@ -36,4 +36,7 @@
     display: block;
     margin: 0 auto;
   }
+  .btn-outline-danger {
+    border-color: #dc3545;
+  }
 </style>

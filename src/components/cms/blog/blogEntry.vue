@@ -67,4 +67,7 @@
     font-size: 75%;
     font-style: italic;
   }
+  .btn-outline-danger {
+    border-color: #dc3545;
+  }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div id="hello">
-    <cms-slider class="slider" :data="slider"></cms-slider>
+    <rf-slider class="slider" :data="slider" />
     <div class="container">
       <div class="row roundimages">
         <template v-for="roundimagetext in roundimagetexts" >
-          <cms-embeded-round-image-text :v-key="roundimagetext.key" :data="roundimagetext"></cms-embeded-round-image-text>
+          <rf-round-image-panel :v-key="roundimagetext.key" :data="roundimagetext" />
         </template>
       </div>
     </div>
@@ -13,13 +13,14 @@
 
 <script>
   import global from '../utils/globalstate';
-  import CmsSlider from '../components/cms/generell/embededSlider';
-  import CmsEmbededRoundImageText from '../components/cms/generell/embededRoundImageText';
+
+  import RfSlider from '../components/cms/generell/Rf-Slider';
+  import RfRoundImagePanel from '../components/cms/generell/Rf-RoundImagePanel';
 
   export default {
     components: {
-      CmsSlider,
-      CmsEmbededRoundImageText,
+      RfSlider,
+      RfRoundImagePanel,
     },
     name: 'hello',
     data() {

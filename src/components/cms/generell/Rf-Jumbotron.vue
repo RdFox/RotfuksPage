@@ -1,6 +1,6 @@
 <template>
   <div class="titles col-12">
-    <b-jumbotron :header="data.sitetitle" :lead="data.title" >
+    <b-jumbotron class="jumbotron" :header="data.sitetitle" :lead="data.title" >
       <p class="welcometext">{{ data.text }}</p>
       <div class="buttons">
         <template v-for="button in data.buttons" :v-key="button.link">
@@ -14,22 +14,26 @@
 
 <script>
   export default {
-    name: 'CmsEmbededJumbotron',
+    name: 'RfJumbotron',
     props: ['data'],
   };
 </script>
 <style scoped>
   .jumbotron {
     background-color: #fff;
-    margin: -30px 0;
+    margin: -30px 30px;
   }
   .welcometext {
     white-space: pre-wrap;
+    font-size: 16px;
   }
   .buttons {
     display: inline-block;
   }
   .button {
     margin-right: 20px;
+  }
+  .btn-outline-danger {
+    border-color: #dc3545;
   }
 </style>

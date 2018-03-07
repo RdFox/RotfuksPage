@@ -116,4 +116,7 @@
   .delete > span:hover {
     color: gray;
   }
+  .btn-outline-danger {
+    border-color: #dc3545;
+  }
 </style>

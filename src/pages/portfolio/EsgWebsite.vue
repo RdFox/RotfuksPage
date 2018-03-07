@@ -1,22 +1,22 @@
 <template>
   <div id="esg-website">
-    <cms-embeded-jumbotron :data="welcometext"></cms-embeded-jumbotron>
+    <rf-jumbotron :data="welcometext" />
     <div class="row roundimages">
       <template v-for="roundimagetext in roundimagetexts" >
-        <cms-embeded-round-images-text :v-key="roundimagetext.key" :data="roundimagetext"></cms-embeded-round-images-text>
+        <rf-rounded-image-panel :v-key="roundimagetext.key" :data="roundimagetext" />
       </template>
     </div>
   </div>
 </template>
 
 <script>
-  import CmsEmbededJumbotron from '../../components/cms/generell/embededJumbotron';
-  import CmsEmbededRoundImagesText from '../../components/cms/generell/embededRoundImageText';
+  import RfJumbotron from '../../components/cms/generell/Rf-Jumbotron';
+  import RfRoundedImagePanel from '../../components/cms/generell/Rf-RoundImagePanel';
 
   export default {
     components: {
-      CmsEmbededJumbotron,
-      CmsEmbededRoundImagesText,
+      RfJumbotron,
+      RfRoundedImagePanel,
     },
     name: 'esgWebsite',
     data() {

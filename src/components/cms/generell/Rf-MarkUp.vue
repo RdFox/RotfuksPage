@@ -1,5 +1,5 @@
 <template>
-  <div class="cms-embeded-text">
+  <div class="rf-markup">
     <div class="row justify-content-center">
       <div class="auto">
         <h2>{{ data.title }}</h2>
@@ -14,7 +14,7 @@
 
 <script>
   export default {
-    name: 'CmsEmbededText',
+    name: 'RfMarkup',
     props: ['data'],
   };
 </script>

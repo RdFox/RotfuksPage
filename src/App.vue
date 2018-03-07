@@ -26,6 +26,8 @@
           global.login(user);
           toastr.success(`Your Login was successful.
           Welcome back!`);
+        } else {
+          global.logout();
         }
       });
 

@@ -11,15 +11,12 @@ const global = {
     },
   },
   login: function login(user) {
+    // eslint-disable-next-line
+    console.log("foo");
     firebase.database().ref(`admin/${user.uid}`)
       .once('value', (snapshot) => {
         // eslint-disable-next-line
-        console.log('meeeeh');
-        // eslint-disable-next-line
-        console.log(`Snap: ${snapshot.val()}`);
-        if (snapshot.hasChild(user.uid)) {
-          global.admin = true;
-        }
+        console.log('Meeeeeh' + snapshot);
       });
     this.loggedIn = true;
     this.user = user;
